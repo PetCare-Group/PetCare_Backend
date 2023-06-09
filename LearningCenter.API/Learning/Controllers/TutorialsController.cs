@@ -9,74 +9,74 @@ namespace LearningCenter.API.Learning.Controllers;
 
 [ApiController]
 [Route("/api/v1/[controller]")]
-public class TutorialsController : ControllerBase
+public class ServicesController : ControllerBase
 {
-    private readonly ITutorialService _tutorialService;
+    private readonly IServiceService _serviceService;
     private readonly IMapper _mapper;
 
-    public TutorialsController(ITutorialService tutorialService, IMapper mapper)
+    public ServicesController(IServiceService serviceService, IMapper mapper)
     {
-        _tutorialService = tutorialService;
+        _serviceService = serviceService;
         _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<IEnumerable<TutorialResource>> GetAllAsync()
+    public async Task<IEnumerable<ServiceResource>> GetAllAsync()
     {
-        var tutorials = await _tutorialService.ListAsync();
-        var resources = _mapper.Map<IEnumerable<Tutorial>, IEnumerable<TutorialResource>>(tutorials);
+        var services = await _serviceService.ListAsync();
+        var resources = _mapper.Map<IEnumerable<Service>, IEnumerable<ServiceResource>>(services);
 
         return resources;
 
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] SaveTutorialResource resource)
+    public async Task<IActionResult> PostAsync([FromBody] SaveServiceResource resource)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState.GetErrorMessages());
 
-        var tutorial = _mapper.Map<SaveTutorialResource, Tutorial>(resource);
+        var service = _mapper.Map<SaveServiceResource, Service>(resource);
 
-        var result = await _tutorialService.SaveAsync(tutorial);
+        var result = await _serviceService.SaveAsync(service);
 
         if (!result.Success)
             return BadRequest(result.Message);
 
-        var tutorialResource = _mapper.Map<Tutorial, TutorialResource>(result.Resource);
+        var serviceResource = _mapper.Map<Service, ServiceResource>(result.Resource);
 
-        return Ok(tutorialResource);
+        return Ok(serviceResource);
     }
 
     // [HttpPut("{id}")]
-    // public async Task<IActionResult> PutAsync(int id, [FromBody] SaveTutorialResource resource)
+    // public async Task<IActionResult> PutAsync(int id, [FromBody] SaveServiceResource resource)
     // {
     //     if (!ModelState.IsValid)
     //         return BadRequest(ModelState.GetErrorMessages());
 
-    //     var tutorial = _mapper.Map<SaveTutorialResource, Tutorial>(resource);
+    //     var service = _mapper.Map<SaveServiceResource, Service>(resource);
 
-    //     var result = await _tutorialService.UpdateAsync(id, tutorial);
+    //     var result = await _serviceService.UpdateAsync(id, service);
 
     //     if (!result.Success)
     //         return BadRequest(result.Message);
 
-    //     var tutorialResource = _mapper.Map<Tutorial, TutorialResource>(result.Resource);
+    //     var serviceResource = _mapper.Map<Service, ServiceResource>(result.Resource);
 
-    //     return Ok(tutorialResource);
+    //     return Ok(serviceResource);
     // }
 
     // [HttpDelete("{id}")]
     // public async Task<IActionResult> DeleteAsync(int id)
     // {
-    //     var result = await _tutorialService.DeleteAsync(id);
+    //     var result = await _serviceService.DeleteAsync(id);
         
     //     if (!result.Success)
     //         return BadRequest(result.Message);
 
-    //     var tutorialResource = _mapper.Map<Tutorial, TutorialResource>(result.Resource);
+    //     var serviceResource = _mapper.Map<Service, ServiceResource>(result.Resource);
 
-    //     return Ok(tutorialResource);
+    //     return Ok(serviceResource);
     // }
 
 }

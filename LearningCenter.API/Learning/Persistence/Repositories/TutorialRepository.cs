@@ -5,54 +5,54 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LearningCenter.API.Shared.Persistence.Repositories;
 
-public class TutorialRepository : BaseRepository, ITutorialRepository
+public class ServiceRepository : BaseRepository, IServiceRepository
 {
-    public TutorialRepository(AppDbContext context) : base(context)
+    public ServiceRepository(AppDbContext context) : base(context)
     {
     }
 
-    public async Task<IEnumerable<Tutorial>> ListAsync()
+    public async Task<IEnumerable<Service>> ListAsync()
     {
-        return await _context.Tutorials
+        return await _context.Services
             .Include(p => p.User)
             .ToListAsync();
     }
 
-    public async Task AddAsync(Tutorial tutorial)
+    public async Task AddAsync(Service service)
     {
-        await _context.Tutorials.AddAsync(tutorial);
+        await _context.Services.AddAsync(service);
     }
 
-    public async Task<Tutorial> FindByIdAsync(int tutorialId)
+    public async Task<Service> FindByIdAsync(int serviceId)
     {
-        return await _context.Tutorials
+        return await _context.Services
             .Include(p => p.User)
-            .FirstOrDefaultAsync(p => p.Id == tutorialId);
+            .FirstOrDefaultAsync(p => p.Id == serviceId);
         
     }
 
-    // public async Task<Tutorial> FindByTitleAsync(string title)
+    // public async Task<Service> FindByTitleAsync(string title)
     // {
-    //     return await _context.Tutorials
+    //     return await _context.Services
     //         .Include(p => p.Category)
     //         .FirstOrDefaultAsync(p => p.Title == title);
     // }
 
-    public async Task<IEnumerable<Tutorial>> FindByCategoryIdAsync(int categoryId)
+    public async Task<IEnumerable<Service>> FindByCategoryIdAsync(int categoryId)
     {
-        return await _context.Tutorials
+        return await _context.Services
             .Where(p => p.UserId == categoryId)
             .Include(p => p.User)
             .ToListAsync();
     }
 
-    public void Update(Tutorial tutorial)
+    public void Update(Service service)
     {
-        _context.Tutorials.Update(tutorial);
+        _context.Services.Update(service);
     }
 
-    public void Remove(Tutorial tutorial)
+    public void Remove(Service service)
     {
-        _context.Tutorials.Remove(tutorial);
+        _context.Services.Remove(service);
     }
 }

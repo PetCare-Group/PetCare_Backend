@@ -9,7 +9,7 @@ public class AppDbContext : DbContext
 {
     
     public DbSet<Category> Categories { get; set; }
-    public DbSet<Tutorial> Tutorials { get; set; }
+    public DbSet<Service> Services { get; set; }
     
     public DbSet<User> Users { get; set; }
 
@@ -46,15 +46,15 @@ public class AppDbContext : DbContext
         
         // Relationships
         builder.Entity<User>()
-            .HasOne(p => p.Tutorial)
+            .HasOne(p => p.Service)
             .WithOne(p => p.User);
             // .HasForeignKey(p => p.);
         
-        builder.Entity<Tutorial>().ToTable("Tutorials");
-        builder.Entity<Tutorial>().HasKey(p => p.Id);
-        builder.Entity<Tutorial>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        //builder.Entity<Tutorial>().Property(p => p.Title).IsRequired().HasMaxLength(50);
-        builder.Entity<Tutorial>().Property(p => p.Description).HasMaxLength(120);
+        builder.Entity<Service>().ToTable("Services");
+        builder.Entity<Service>().HasKey(p => p.Id);
+        builder.Entity<Service>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        //builder.Entity<Service>().Property(p => p.Title).IsRequired().HasMaxLength(50);
+        builder.Entity<Service>().Property(p => p.Description).HasMaxLength(120);
         
         // Users
             

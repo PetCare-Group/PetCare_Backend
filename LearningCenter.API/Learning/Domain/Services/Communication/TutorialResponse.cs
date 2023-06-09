@@ -3,13 +3,13 @@ using LearningCenter.API.Shared.Domain.Services.Communication;
 
 namespace LearningCenter.API.Learning.Domain.Services.Communication;
 
-public class TutorialResponse : BaseResponse<Tutorial>
+public class ServiceResponse : BaseResponse<Service>
 {
-    public TutorialResponse(string message) : base(message)
+    public ServiceResponse(string message) : base(message)
     {
     }
 
-    public TutorialResponse(Tutorial resource) : base(resource)
+    public ServiceResponse(Service resource) : base(resource)
     {
     }
 }

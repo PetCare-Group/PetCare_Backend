@@ -10,7 +10,7 @@ public class User
     public string LastName { get; set; }
     public string Username { get; set; }
 
-    public Tutorial Tutorial { get; set; }
+    public Service Service { get; set; }
 
 
     [JsonIgnore]

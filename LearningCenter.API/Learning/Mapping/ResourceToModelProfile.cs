@@ -9,7 +9,7 @@ public class ResourceToModelProfile : Profile
     public ResourceToModelProfile()
     {
         CreateMap<SaveCategoryResource, Category>();
-        CreateMap<SaveTutorialResource, Tutorial>();
+        CreateMap<SaveServiceResource, Service>();
         CreateMap<SavePetResource, Pet>();
 
     }

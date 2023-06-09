@@ -3,11 +3,11 @@ using LearningCenter.API.Learning.Domain.Services.Communication;
 
 namespace LearningCenter.API.Learning.Domain.Services;
 
-public interface ITutorialService
+public interface IServiceService
 {
-    Task<IEnumerable<Tutorial>> ListAsync();
-    // Task<IEnumerable<Tutorial>> ListByCategoryIdAsync(int categoryId);
-    Task<TutorialResponse> SaveAsync(Tutorial tutorial);
-    // Task<TutorialResponse> UpdateAsync(int tutorialId, Tutorial tutorial);
-    // Task<TutorialResponse> DeleteAsync(int tutorialId);
+    Task<IEnumerable<Service>> ListAsync();
+    // Task<IEnumerable<Service>> ListByCategoryIdAsync(int categoryId);
+    Task<ServiceResponse> SaveAsync(Service service);
+    // Task<ServiceResponse> UpdateAsync(int serviceId, Service service);
+    // Task<ServiceResponse> DeleteAsync(int serviceId);
 }
