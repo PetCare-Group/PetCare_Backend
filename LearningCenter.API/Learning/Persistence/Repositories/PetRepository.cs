@@ -24,9 +24,9 @@ public class PetRepository : BaseRepository ,IPetRepository
         await _context.Pets.AddAsync(pet);
     }
 
-    public async Task<Pet> FindByNameAsync(string name)
+    public async Task<Pet> FindByIdAsync(int id)
     {
-        return await _context.Pets.SingleOrDefaultAsync(x => x.Name == name);
+        return await _context.Pets.FindAsync(id);
     }
 
     public void Update(Pet pet)

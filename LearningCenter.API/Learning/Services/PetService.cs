@@ -23,15 +23,15 @@ public class PetService: IPetService
         return await _petRepository.ListAsync();
     }
 
-    public async Task<PetResponse> DeletePetAsync(string name)
+    public async Task<PetResponse> DeletePetAsync(int id)
     {
-        var existingPet = await _petRepository.FindByNameAsync(name);
+        var existingPet = await _petRepository.FindByIdAsync(id);
         if (existingPet == null)
             return new PetResponse("error mascota no encontrada");
 
         try
         {
-            _petRepository.Update(existingPet);
+            _petRepository.Remove(existingPet);
             await _unitOfWork.CompleteAsync();
 
             return new PetResponse(existingPet);
@@ -42,9 +42,9 @@ public class PetService: IPetService
         }
     }
 
-    public async Task<PetResponse> UpdatePetAsync(string name, Pet pet)
+    public async Task<PetResponse> UpdatePetAsync(int id, Pet pet)
     {
-        var existingPet = await _petRepository.FindByNameAsync(name);
+        var existingPet = await _petRepository.FindByIdAsync(id);
 
         if (existingPet == null)
         {
