@@ -51,14 +51,14 @@ public class PetController: ControllerBase
         return Ok(petResource);
     }
 
-    [HttpPut("{name}")]
-    public async Task<IActionResult> PutAsync(string name, [FromBody] SavePetResource resource)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutAsync(int id, [FromBody] SavePetResource resource)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState.GetErrorMessages());
         
         var pet = _mapper.Map<SavePetResource, Pet>(resource);
-        var result = await _petService.UpdatePetAsync(name, pet);
+        var result = await _petService.UpdatePetAsync(id, pet);
         
         if (!result.Success)
             return BadRequest(result.Message);
@@ -69,9 +69,9 @@ public class PetController: ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(string name)
+    public async Task<IActionResult> DeleteAsync(int id)
     {
-        var result = await _petService.DeletePetAsync(name);
+        var result = await _petService.DeletePetAsync(id);
 
         if (!result.Success)
             return BadRequest(result.Message);
