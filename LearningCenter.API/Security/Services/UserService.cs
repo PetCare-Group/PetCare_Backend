@@ -28,9 +28,9 @@ public class UserService : IUserService
 
     public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
     {
-        var user = await _userRepository.FindByUsernameAsync(request.Username);
-        Console.WriteLine($"Request: {request.Username}, {request.Password}");
-        Console.WriteLine($"User: {user.Id}, {user.FirstName}, {user.LastName}, {user.Username}, {user.PasswordHash}");
+        var user = await _userRepository.FindByMailAsync(request.Mail);
+        Console.WriteLine($"Request: {request.Mail}, {request.Password}");
+        Console.WriteLine($"User: {user.Id}, {user.FirstName}, {user.LastName}, {user.Mail}, {user.PasswordHash}");
             
 
         // validate
@@ -43,7 +43,7 @@ public class UserService : IUserService
         Console.WriteLine("Authentication successful. About to generate token");
         // authentication successful
         var response = _mapper.Map<AuthenticateResponse>(user);
-        Console.WriteLine($"Response: {response.Id}, {response.FirstName}, {response.LastName}, {response.Username}");
+        Console.WriteLine($"Response: {response.Id}, {response.FirstName}, {response.LastName}, {response.Mail}");
         response.Token = _jwtHandler.GenerateToken(user);
         Console.WriteLine($"Generated token is {response.Token}");
         return response;
@@ -64,8 +64,8 @@ public class UserService : IUserService
     public async Task RegisterAsync(RegisterRequest request)
     {
         // validate
-        if (_userRepository.ExistsByUsername(request.Username)) 
-            throw new AppException("Username '" + request.Username + "' is already taken");
+        if (_userRepository.ExistsByMail(request.Mail)) 
+            throw new AppException("Username '" + request.Mail + "' is already taken");
 
         // map model to new user object
         var user = _mapper.Map<User>(request);
@@ -90,8 +90,8 @@ public class UserService : IUserService
         var user = GetById(id);
 
         // Validate
-        if (_userRepository.ExistsByUsername(request.Username)) 
-            throw new AppException("Username '" + request.Username + "' is already taken");
+        if (_userRepository.ExistsByMail(request.Mail)) 
+            throw new AppException("Username '" + request.Mail + "' is already taken");
 
         // Hash password if it was entered
         if (!string.IsNullOrEmpty(request.Password))
