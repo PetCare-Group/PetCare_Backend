@@ -7,6 +7,6 @@ public class Category
     
     // Relationships
     
-    public IList<Tutorial> Tutorials { get; set; } = new List<Tutorial>();
+    public IList<Service> Services { get; set; } = new List<Service>();
     
 }

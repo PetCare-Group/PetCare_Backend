@@ -8,9 +8,9 @@ public class User
     public int Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string Username { get; set; }
+    public string Mail { get; set; }
 
-    public Tutorial Tutorial { get; set; }
+    public Service Service { get; set; }
 
 
     [JsonIgnore]

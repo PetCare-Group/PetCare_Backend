@@ -5,130 +5,130 @@ using LearningCenter.API.Learning.Domain.Services.Communication;
 
 namespace LearningCenter.API.Learning.Services;
 
-public class TutorialService : ITutorialService
+public class ServiceService : IServiceService
 {
-    private readonly ITutorialRepository _tutorialRepository;
+    private readonly IServiceRepository _serviceRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ICategoryRepository _categoryRepository;
 
-    public TutorialService(ITutorialRepository tutorialRepository, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository)
+    public ServiceService(IServiceRepository serviceRepository, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository)
     {
-        _tutorialRepository = tutorialRepository;
+        _serviceRepository = serviceRepository;
         _unitOfWork = unitOfWork;
         _categoryRepository = categoryRepository;
     }
 
-    public async Task<IEnumerable<Tutorial>> ListAsync()
+    public async Task<IEnumerable<Service>> ListAsync()
     {
-        return await _tutorialRepository.ListAsync();
+        return await _serviceRepository.ListAsync();
     }
 
-    // public async Task<IEnumerable<Tutorial>> ListByCategoryIdAsync(int categoryId)
+    // public async Task<IEnumerable<Service>> ListByCategoryIdAsync(int categoryId)
     // {
-    //     return await _tutorialRepository.FindByCategoryIdAsync(categoryId);
+    //     return await _serviceRepository.FindByCategoryIdAsync(categoryId);
     // }
 
-    public async Task<TutorialResponse> SaveAsync(Tutorial tutorial)
+    public async Task<ServiceResponse> SaveAsync(Service service)
     {
         // Validate CategoryId
 
-        var existingCategory = await _categoryRepository.FindByIdAsync(tutorial.UserId);
+        var existingCategory = await _categoryRepository.FindByIdAsync(service.UserId);
 
         if (existingCategory == null)
-            return new TutorialResponse("Invalid Category");
+            return new ServiceResponse("Invalid Category");
         
         // Validate Title
 
-        // var existingTutorialWithTitle = await _tutorialRepository.FindByTitleAsync(tutorial.Title);
+        // var existingServiceWithTitle = await _serviceRepository.FindByTitleAsync(service.Title);
 
-        // if (existingTutorialWithTitle != null)
-        //     return new TutorialResponse("Tutorial title already exists.");
+        // if (existingServiceWithTitle != null)
+        //     return new ServiceResponse("Service title already exists.");
 
         try
         {
-            // Add Tutorial
-            await _tutorialRepository.AddAsync(tutorial);
+            // Add Service
+            await _serviceRepository.AddAsync(service);
             
             // Complete Transaction
             await _unitOfWork.CompleteAsync();
             
             // Return response
-            return new TutorialResponse(tutorial);
+            return new ServiceResponse(service);
 
         }
         catch (Exception e)
         {
             // Error Handling
-            return new TutorialResponse($"An error occurred while saving the tutorial: {e.Message}");
+            return new ServiceResponse($"An error occurred while saving the service: {e.Message}");
         }
 
         
     }
 
-    // public async Task<TutorialResponse> UpdateAsync(int tutorialId, Tutorial tutorial)
+    // public async Task<ServiceResponse> UpdateAsync(int serviceId, Service service)
     // {
-    //     var existingTutorial = await _tutorialRepository.FindByIdAsync(tutorialId);
+    //     var existingService = await _serviceRepository.FindByIdAsync(serviceId);
         
-    //     // Validate Tutorial
+    //     // Validate Service
 
-    //     if (existingTutorial == null)
-    //         return new TutorialResponse("Tutorial not found.");
+    //     if (existingService == null)
+    //         return new ServiceResponse("Service not found.");
 
     //     // Validate CategoryId
 
-    //     var existingCategory = await _categoryRepository.FindByIdAsync(tutorial.CategoryId);
+    //     var existingCategory = await _categoryRepository.FindByIdAsync(service.CategoryId);
 
     //     if (existingCategory == null)
-    //         return new TutorialResponse("Invalid Category");
+    //         return new ServiceResponse("Invalid Category");
         
     //     // Validate Title
 
-    //     var existingTutorialWithTitle = await _tutorialRepository.FindByTitleAsync(tutorial.Title);
+    //     var existingServiceWithTitle = await _serviceRepository.FindByTitleAsync(service.Title);
 
-    //     if (existingTutorialWithTitle != null && existingTutorialWithTitle.Id != existingTutorial.Id)
-    //         return new TutorialResponse("Tutorial title already exists.");
+    //     if (existingServiceWithTitle != null && existingServiceWithTitle.Id != existingService.Id)
+    //         return new ServiceResponse("Service title already exists.");
         
     //     // Modify Fields
-    //     existingTutorial.Title = tutorial.Title;
-    //     existingTutorial.Description = tutorial.Description;
+    //     existingService.Title = service.Title;
+    //     existingService.Description = service.Description;
 
     //     try
     //     {
-    //         _tutorialRepository.Update(existingTutorial);
+    //         _serviceRepository.Update(existingService);
     //         await _unitOfWork.CompleteAsync();
 
-    //         return new TutorialResponse(existingTutorial);
+    //         return new ServiceResponse(existingService);
             
     //     }
     //     catch (Exception e)
     //     {
     //         // Error Handling
-    //         return new TutorialResponse($"An error occurred while updating the tutorial: {e.Message}");
+    //         return new ServiceResponse($"An error occurred while updating the service: {e.Message}");
     //     }
 
     // }
 
-    // public async Task<TutorialResponse> DeleteAsync(int tutorialId)
+    // public async Task<ServiceResponse> DeleteAsync(int serviceId)
     // {
-    //     var existingTutorial = await _tutorialRepository.FindByIdAsync(tutorialId);
+    //     var existingService = await _serviceRepository.FindByIdAsync(serviceId);
         
-    //     // Validate Tutorial
+    //     // Validate Service
 
-    //     if (existingTutorial == null)
-    //         return new TutorialResponse("Tutorial not found.");
+    //     if (existingService == null)
+    //         return new ServiceResponse("Service not found.");
         
     //     try
     //     {
-    //         _tutorialRepository.Remove(existingTutorial);
+    //         _serviceRepository.Remove(existingService);
     //         await _unitOfWork.CompleteAsync();
 
-    //         return new TutorialResponse(existingTutorial);
+    //         return new ServiceResponse(existingService);
             
     //     }
     //     catch (Exception e)
     //     {
     //         // Error Handling
-    //         return new TutorialResponse($"An error occurred while deleting the tutorial: {e.Message}");
+    //         return new ServiceResponse($"An error occurred while deleting the service: {e.Message}");
     //     }
 
     // }

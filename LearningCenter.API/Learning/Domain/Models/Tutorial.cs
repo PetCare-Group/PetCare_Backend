@@ -3,14 +3,17 @@ using LearningCenter.API.Security.Domain.Models;
 namespace LearningCenter.API.Learning.Domain.Models;
 
 
-public class Tutorial
+public class Service
 {
     public int Id { get; set; }
     public int Price { get; set; }
     public string Description { get; set; }
     
     public string Location { get; set; }
-    public bool castrado { get; set; }
+    public string review { get; set; }
+    public string phone { get; set; }
+    public string dni { get; set; }
+    public string typeService { get; set; }
     // Relationships
     // public int CategoryId { get; set; }
     public int UserId { get; set; }

@@ -2,13 +2,13 @@ using LearningCenter.API.Learning.Domain.Models;
 
 namespace LearningCenter.API.Learning.Domain.Repositories;
 
-public interface ITutorialRepository
+public interface IServiceRepository
 {
-    Task<IEnumerable<Tutorial>> ListAsync();
-    Task AddAsync(Tutorial tutorial);
-    Task<Tutorial> FindByIdAsync(int tutorialId);
-    // Task<Tutorial> FindByTitleAsync(string title);
-    Task<IEnumerable<Tutorial>> FindByCategoryIdAsync(int categoryId);
-    void Update(Tutorial tutorial);
-    void Remove(Tutorial tutorial);
+    Task<IEnumerable<Service>> ListAsync();
+    Task AddAsync(Service service);
+    Task<Service> FindByIdAsync(int serviceId);
+    // Task<Service> FindByTitleAsync(string title);
+    Task<IEnumerable<Service>> FindByCategoryIdAsync(int categoryId);
+    void Update(Service service);
+    void Remove(Service service);
 }

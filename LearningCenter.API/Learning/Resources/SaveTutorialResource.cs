@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LearningCenter.API.Learning.Resources;
 
-public class SaveTutorialResource
+public class SaveServiceResource
 {
     // [Required]
     // [MaxLength(50)]
@@ -13,7 +13,11 @@ public class SaveTutorialResource
     [Required]
     public string Location { get; set; }
     [Required]
-    public bool castrado { get; set; }
+    public string review { get; set; }
+
+    public string phone { get; set; }
+    public string dni { get; set; }
+    public string typeService { get; set; }
 
     
     [MaxLength(120)]
