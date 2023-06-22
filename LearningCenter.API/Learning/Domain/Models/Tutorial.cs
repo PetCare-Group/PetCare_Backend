@@ -11,6 +11,8 @@ public class Service
     
     public string Location { get; set; }
     public string review { get; set; }
+    public string phone { get; set; }
+    public string dni { get; set; }
     public string typeService { get; set; }
     // Relationships
     // public int CategoryId { get; set; }
