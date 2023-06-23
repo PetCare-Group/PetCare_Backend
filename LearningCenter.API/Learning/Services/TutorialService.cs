@@ -18,6 +18,13 @@ public class ServiceService : IServiceService
         _categoryRepository = categoryRepository;
     }
 
+    public async Task<Service> GetByIdAsync(int id)
+    {
+         var user = await _serviceRepository.FindByIdAsync(id);
+        if (user == null) throw new KeyNotFoundException("Service not found");
+        return user;
+    }
+
     public async Task<IEnumerable<Service>> ListAsync()
     {
         return await _serviceRepository.ListAsync();

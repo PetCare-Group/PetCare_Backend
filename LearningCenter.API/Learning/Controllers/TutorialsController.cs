@@ -30,6 +30,14 @@ public class ServicesController : ControllerBase
 
     }
 
+     [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var user = await _serviceService.GetByIdAsync(id);
+        var resource = _mapper.Map<Service, ServiceResource>(user);
+        return Ok(resource);
+    }
+
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] SaveServiceResource resource)
     {

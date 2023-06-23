@@ -6,6 +6,7 @@ namespace LearningCenter.API.Learning.Domain.Services;
 public interface IServiceService
 {
     Task<IEnumerable<Service>> ListAsync();
+    Task<Service> GetByIdAsync(int id);
     // Task<IEnumerable<Service>> ListByCategoryIdAsync(int categoryId);
     Task<ServiceResponse> SaveAsync(Service service);
     // Task<ServiceResponse> UpdateAsync(int serviceId, Service service);
