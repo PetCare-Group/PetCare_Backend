@@ -42,7 +42,7 @@ public class ServiceService : IServiceService
         var existingCategory = await _categoryRepository.FindByIdAsync(service.UserId);
 
         if (existingCategory == null)
-            return new ServiceResponse("Invalid Category");
+            return new ServiceResponse("Invalid User Id");
         
         // Validate Title
 
