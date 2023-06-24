@@ -13,6 +13,8 @@ public class AppDbContext : DbContext
     
     public DbSet<User> Users { get; set; }
 
+    public DbSet<Payment>Payments { get; set; }
+
     public AppDbContext(DbContextOptions options) : base(options)
     {
     }
@@ -43,6 +45,14 @@ public class AppDbContext : DbContext
         builder.Entity<Category>().HasKey(p => p.Id);
         builder.Entity<Category>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Category>().Property(p => p.Name).IsRequired().HasMaxLength(30);
+
+        //Payments
+        builder.Entity<Payment>().ToTable("Payments");
+        builder.Entity<Payment>().HasKey(p=>p.Id);
+        builder.Entity<Payment>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Payment>().Property(p => p.Number).IsRequired().HasMaxLength(16);
+    
+    builder.Entity<Payment>().HasOne(p=>p.User).WithMany(p=>p.Payments);
         
         // Relationships
         builder.Entity<User>()

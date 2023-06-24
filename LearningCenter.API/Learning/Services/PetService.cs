@@ -66,9 +66,11 @@ public class PetService: IPetService
         }
     }
 
-    public Task<PetResponse> FindPetByNameAsync(string name)
+    public async Task<Pet> FindPetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+         var user = await _petRepository.FindByIdAsync(id);
+        if (user == null) throw new KeyNotFoundException("Service not found");
+        return user;
     }
 
     public async Task<PetResponse> SavePetAsync(Pet pet)

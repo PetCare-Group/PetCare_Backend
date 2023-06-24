@@ -11,6 +11,7 @@ public class ResourceToModelProfile : Profile
         CreateMap<SaveCategoryResource, Category>();
         CreateMap<SaveServiceResource, Service>();
         CreateMap<SavePetResource, Pet>();
+        CreateMap<SavePaymentResource,Payment>();
 
     }
 }

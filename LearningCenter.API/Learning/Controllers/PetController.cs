@@ -33,6 +33,14 @@ public class PetController: ControllerBase
         return resources;
     }
 
+[HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var user = await _petService.FindPetByIdAsync(id);
+        var resource = _mapper.Map<Pet, PetResource>(user);
+        return Ok(resource);
+    }
+    
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] SavePetResource resource)
     {

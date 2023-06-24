@@ -13,6 +13,8 @@ public class User
     public Service Service { get; set; }
 
 
+    public IList<Payment> Payments { get; set; }= new List<Payment>();
+
     [JsonIgnore]
     public string PasswordHash { get; set; }
 }

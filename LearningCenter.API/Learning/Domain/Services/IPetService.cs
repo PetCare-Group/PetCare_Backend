@@ -8,7 +8,7 @@ public interface IPetService
     Task<IEnumerable<Pet>> ListByClientAsync();
     Task <PetResponse> DeletePetAsync(int id);
     Task<PetResponse> UpdatePetAsync(int id, Pet pet);
-    Task<PetResponse> FindPetByNameAsync(string name);
+    Task<Pet> FindPetByIdAsync(int id);
     Task<PetResponse> SavePetAsync(Pet pet);
     
 }
