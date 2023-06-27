@@ -1,0 +1,31 @@
+using AutoMapper;
+using LearningCenter.API.Learning.Domain.Models;
+using LearningCenter.API.Learning.Domain.Services;
+using LearningCenter.API.Learning.Resources;
+using Microsoft.AspNetCore.Mvc;
+
+namespace LearningCenter.API.Learning.Controllers;
+
+[ApiController]
+[Route("/api/v1/pet/{userId}/pet")]
+public class PetUserController : ControllerBase
+{
+    private readonly IPetService _petService;
+    private readonly IMapper _mapper;
+
+    public PetUserController(IPetService petService, IMapper mapper)
+    {
+        _petService = petService;
+        _mapper = mapper;
+    }
+
+    [HttpGet]
+     public async Task<IEnumerable<PetResource>> GetAllByUserIdAsync(int userId)
+    {
+         var pets = await _petService.ListByClientAsync(userId);
+
+         var resources = _mapper.Map<IEnumerable<Pet>, IEnumerable<PetResource>>(pets);
+
+            return resources;
+     }
+}

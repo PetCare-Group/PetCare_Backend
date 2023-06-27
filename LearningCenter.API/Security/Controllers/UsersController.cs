@@ -25,11 +25,15 @@ public class UsersController: ControllerBase
     
     [AllowAnonymous]
     [HttpPost("sign-in")]
-    public async Task<IActionResult> Authenticate(AuthenticateRequest request)
+    public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
     {
         var response = await _userService.Authenticate(request);
-        return Ok(response);
+        Console.WriteLine(response);
+
+        return (response);
     }
+
+
     
     [AllowAnonymous]
     [HttpPost("sign-up")]

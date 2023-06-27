@@ -38,4 +38,12 @@ public class PetRepository : BaseRepository ,IPetRepository
     {
         _context.Pets.Remove(pet);
     }
+
+      public async Task<IEnumerable<Pet>> FindByUserIdAsync(int userId){
+
+          return await _context.Pets
+            .Where(p => p.UserId == userId)
+            .Include(p => p.User)
+            .ToListAsync();
+    }
 }

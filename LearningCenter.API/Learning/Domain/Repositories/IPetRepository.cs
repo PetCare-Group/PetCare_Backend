@@ -9,4 +9,6 @@ public interface IPetRepository
     Task<Pet> FindByIdAsync(int id);
     void Update(Pet pet);
     void Remove(Pet pet);
+
+    Task<IEnumerable<Pet>> FindByUserIdAsync(int userId);
 }

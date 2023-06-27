@@ -24,10 +24,10 @@ public class PetController: ControllerBase
     }
     
     [HttpGet]
-    public async Task<IEnumerable<PetResource>> GetAllAsync()
+    public async Task<IEnumerable<PetResource>> GetAllAsync(int id)
     {
         
-        var pets = await _petService.ListByClientAsync();
+        var pets = await _petService.ListByClientAsync(id);
         var resources = _mapper.Map<IEnumerable<Pet>, IEnumerable<PetResource>>(pets);
 
         return resources;
