@@ -32,9 +32,9 @@ public class PaymentService : IPaymentService
         return await _paymentRepository.FindByUserIdAsync(id);
     }
 
-    public Task<IEnumerable<Payment>> ListAsync()
+    public async Task<IEnumerable<Payment>> ListAsync()
     {
-        throw new NotImplementedException();
+       return await _paymentRepository.ListAsync();
     }
 
     public async Task<PaymentResponse> SaveAsync(Payment payment)
