@@ -32,17 +32,17 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo()
     {
         Version = "v1",
-        Title = "ACME Learning Center API",
-        Description = "ACME Learning Center RESTful API",
+        Title = "PETCARE  API",
+        Description = "Petcare RESTful API",
         TermsOfService = new Uri("https://acme-learning.com/tos"),
         Contact = new OpenApiContact
         {
-            Name = "ACME.studio",
+            Name = "Petcare.studio",
             Url = new Uri("https://acme.studio")
         },
         License = new OpenApiLicense
         {
-            Name = "ACME Learning Center Resources License",
+            Name = "Petcare Resources License",
             Url = new Uri("https://acme-learning.com/license")
         }
     });
