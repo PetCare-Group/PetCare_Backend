@@ -3,6 +3,7 @@ using LearningCenter.API.Learning.Domain.Models;
 using LearningCenter.API.Learning.Domain.Services;
 using LearningCenter.API.Learning.Resources;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LearningCenter.API.Learning.Controllers;
 
@@ -20,6 +21,12 @@ public class PaymentUserController : ControllerBase
     }
 
     [HttpGet]
+    [SwaggerOperation( 
+        Summary = "Get All the payments by User",
+        Description = "Get existing methods of payments associated with the specified User",
+        OperationId = "GetPaymentUser",
+        Tags = new[] { "Payment"}
+    )]
      public async Task<IEnumerable<PaymentResource>> GetAllByUserIdAsync(int userId)
     {
          var payments = await _paymentService.GetByUserIdAsync(userId);

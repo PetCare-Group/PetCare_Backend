@@ -4,11 +4,13 @@ using LearningCenter.API.Learning.Domain.Services;
 using LearningCenter.API.Learning.Resources;
 using LearningCenter.API.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LearningCenter.API.Learning.Controllers;
 
 [ApiController]
 [Route("/api/v1/[controller]")]
+[SwaggerTag("Create and  read information about payment methods")]
 public class PaymentController : ControllerBase
 {
     private readonly IPaymentService _paymentService;
@@ -22,6 +24,11 @@ public class PaymentController : ControllerBase
     }
 
     [HttpGet]
+    [SwaggerOperation(
+        Summary = "See payment's methods",
+        Description = "See all the payment's methods") 
+    ]
+    [ProducesResponseType(typeof(IEnumerable<PaymentResource>), 200)]
     public async Task<IEnumerable<PaymentResource>> GetAllAsync()
     {
         var payments = await _paymentService.ListAsync();
@@ -31,6 +38,13 @@ public class PaymentController : ControllerBase
     }
 
     [HttpPost]
+    [SwaggerOperation(
+        Summary = "Save a payment method",
+        Description = "Add new payment method sending all the information about it") 
+    ]
+    [ProducesResponseType(typeof(PaymentResource), 201)]
+    [ProducesResponseType(typeof(List<string>), 400)]
+    [ProducesResponseType(500)]
     public async Task<IActionResult> PostAsync([FromBody] SavePaymentResource resource)
     {
         if (!ModelState.IsValid)

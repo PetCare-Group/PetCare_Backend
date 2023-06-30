@@ -11,45 +11,57 @@ namespace LearningCenter.API.Learning.Controllers;
 [ApiController]
 [Route("/api/v1/[controller]")]
 [SwaggerTag("Create, read, update and delete Pets")]
-public class PetController: ControllerBase
+public class PetController : ControllerBase
 {
-    
+
     private readonly IPetService _petService;
     private readonly IMapper _mapper;
 
     public PetController(IPetService petService, IMapper mapper)
     {
-       
+
         _petService = petService;
         _mapper = mapper;
     }
 
-  
 
-    
+
+
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<CategoryResource>), 200)]
-   
-    public async Task<IEnumerable<PetResource>> GetAllAsync(int id)
+    [SwaggerOperation(
+        Summary = "See pet",
+        Description = "See all the pets") 
+    ]
+    [ProducesResponseType(typeof(IEnumerable<PetResource>), 200)]
+
+    public async Task<IEnumerable<PetResource>> GetAllAsync()
     {
-        
-        var pets = await _petService.ListByClientAsync(id);
+
+        var pets = await _petService.ListAsync();
         var resources = _mapper.Map<IEnumerable<Pet>, IEnumerable<PetResource>>(pets);
 
         return resources;
     }
 
-[HttpGet("{id}")]
+    [HttpGet("{id}")]
+    [SwaggerOperation(
+        Summary = "See your pet",
+        Description = "See a specified pet by its Id") 
+    ]
     public async Task<IActionResult> GetById(int id)
     {
         var user = await _petService.FindPetByIdAsync(id);
         var resource = _mapper.Map<Pet, PetResource>(user);
-        return Ok(resource);
+        return Created(nameof(GetById), resource);
     }
-    
-   
+
+
     [HttpPost]
-    [ProducesResponseType(typeof(CategoryResource), 201)]
+    [SwaggerOperation(
+        Summary = "Save a pet",
+        Description = "Add new pet sending all the information about it") 
+    ]
+    [ProducesResponseType(typeof(PetResource), 201)]
     [ProducesResponseType(typeof(List<string>), 400)]
     [ProducesResponseType(500)]
     public async Task<IActionResult> PostAsync([FromBody] SavePetResource resource)
@@ -70,6 +82,13 @@ public class PetController: ControllerBase
     }
 
     [HttpPut("{id}")]
+    [SwaggerOperation(
+        Summary = "Update a pet",
+        Description = "Change the information of your pet giving the specified Id") 
+    ]
+    [ProducesResponseType(typeof(CategoryResource), 200)]
+    [ProducesResponseType(typeof(List<string>), 404)]
+    [ProducesResponseType(500)]
     public async Task<IActionResult> PutAsync(int id, [FromBody] SavePetResource resource)
     {
         if (!ModelState.IsValid)
@@ -87,6 +106,13 @@ public class PetController: ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [SwaggerOperation(
+        Summary = "Delete  Pet",
+        Description = "Delete your pet giving the specified Id") 
+    ]
+    [ProducesResponseType(typeof(PetResource), 200)]
+    [ProducesResponseType(typeof(List<string>), 404)]
+    [ProducesResponseType(500)]
     public async Task<IActionResult> DeleteAsync(int id)
     {
         var result = await _petService.DeletePetAsync(id);

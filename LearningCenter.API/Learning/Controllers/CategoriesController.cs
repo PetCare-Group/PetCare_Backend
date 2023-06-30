@@ -4,6 +4,7 @@ using LearningCenter.API.Learning.Domain.Services;
 using LearningCenter.API.Learning.Resources;
 using LearningCenter.API.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LearningCenter.API.Learning.Controllers;
 
@@ -22,6 +23,11 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpGet]
+    [SwaggerOperation(
+        Summary = "See roles/categories",
+        Description = "See all the roles/categories") 
+    ]
+    [ProducesResponseType(typeof(IEnumerable<PetResource>), 200)]
     public async Task<IEnumerable<CategoryResource>> GetAllAsync()
     {
         var categories = await _categoryService.ListAsync();
@@ -31,6 +37,13 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPost]
+    [SwaggerOperation(
+        Summary = "Save a category/role",
+        Description = "Add a new category/role sending all the information about it") 
+    ]
+    [ProducesResponseType(typeof(PetResource), 201)]
+    [ProducesResponseType(typeof(List<string>), 400)]
+    [ProducesResponseType(500)]
     public async Task<IActionResult> PostAsync([FromBody] SaveCategoryResource resource)
     {
         if (!ModelState.IsValid)

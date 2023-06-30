@@ -4,11 +4,13 @@ using LearningCenter.API.Learning.Domain.Services;
 using LearningCenter.API.Learning.Resources;
 using LearningCenter.API.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LearningCenter.API.Learning.Controllers;
 
 [ApiController]
 [Route("/api/v1/[controller]")]
+[SwaggerTag("Create and read information about people who gives services")]
 public class ServicesController : ControllerBase
 {
     private readonly IServiceService _serviceService;
@@ -21,6 +23,11 @@ public class ServicesController : ControllerBase
     }
 
     [HttpGet]
+    [SwaggerOperation(
+        Summary = "See services",
+        Description = "See all the information about the users that gives services") 
+    ]
+    [ProducesResponseType(typeof(IEnumerable<PetResource>), 200)]
     public async Task<IEnumerable<ServiceResource>> GetAllAsync()
     {
         var services = await _serviceService.ListAsync();
@@ -31,6 +38,11 @@ public class ServicesController : ControllerBase
     }
 
      [HttpGet("{id}")]
+     [SwaggerOperation(
+         Summary = "See a service",
+         Description = "See a specified information about a person who gives services by its Id") 
+     ]
+     [ProducesResponseType(typeof(IEnumerable<ServiceResource>), 200)]
     public async Task<IActionResult> GetById(int id)
     {
         var user = await _serviceService.GetByIdAsync(id);
@@ -39,6 +51,13 @@ public class ServicesController : ControllerBase
     }
 
     [HttpPost]
+    [SwaggerOperation(
+        Summary = "Save a new service",
+        Description = "Add a new person who gives services sending all the information about it") 
+    ]
+    [ProducesResponseType(typeof(ServiceResource), 201)]
+    [ProducesResponseType(typeof(List<string>), 400)]
+    [ProducesResponseType(500)]
     public async Task<IActionResult> PostAsync([FromBody] SaveServiceResource resource)
     {
         if (!ModelState.IsValid)

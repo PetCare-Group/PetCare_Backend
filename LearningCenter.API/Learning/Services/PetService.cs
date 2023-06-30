@@ -18,6 +18,11 @@ public class PetService: IPetService
         _unitOfWork = unitOfWork;
     }
 
+    public async Task<IEnumerable<Pet>> ListAsync()
+    {
+        return await _petRepository.ListAsync();
+    }
+
     public async Task<IEnumerable<Pet>> ListByClientAsync(int id )
     {
         return await _petRepository.FindByUserIdAsync(id);

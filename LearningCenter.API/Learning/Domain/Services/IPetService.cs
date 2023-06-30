@@ -5,6 +5,7 @@ namespace LearningCenter.API.Learning.Domain.Services;
 
 public interface IPetService
 {
+    Task<IEnumerable<Pet>> ListAsync();
     Task<IEnumerable<Pet>> ListByClientAsync(int id);
     Task <PetResponse> DeletePetAsync(int id);
     Task<PetResponse> UpdatePetAsync(int id, Pet pet);
