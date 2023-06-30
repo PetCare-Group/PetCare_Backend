@@ -3,6 +3,7 @@ using LearningCenter.API.Learning.Domain.Models;
 using LearningCenter.API.Learning.Domain.Services;
 using LearningCenter.API.Learning.Resources;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LearningCenter.API.Learning.Controllers;
 
@@ -20,6 +21,13 @@ public class PetUserController : ControllerBase
     }
 
     [HttpGet]
+    [SwaggerOperation( 
+        Summary = "Get All Pets for given User",
+        Description = "Get existing Pets associated with the specified User",
+        OperationId = "GetPetUser",
+        Tags = new[] { "Pet"}
+    )]
+
      public async Task<IEnumerable<PetResource>> GetAllByUserIdAsync(int userId)
     {
          var pets = await _petService.ListByClientAsync(userId);

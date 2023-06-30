@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using LearningCenter.API.Learning.Domain.Models;
 using LearningCenter.API.Learning.Domain.Services;
 using LearningCenter.API.Learning.Resources;
 using LearningCenter.API.Shared.Extensions;
+using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
-namespace LearningCenter.API.Learning.Controller;
+namespace LearningCenter.API.Learning.Controllers;
 
 [ApiController]
-
 [Route("/api/v1/[controller]")]
+[SwaggerTag("Create, read, update and delete Pets")]
 public class PetController: ControllerBase
 {
     
@@ -22,8 +23,13 @@ public class PetController: ControllerBase
         _petService = petService;
         _mapper = mapper;
     }
+
+  
+
     
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<CategoryResource>), 200)]
+   
     public async Task<IEnumerable<PetResource>> GetAllAsync(int id)
     {
         
@@ -41,7 +47,11 @@ public class PetController: ControllerBase
         return Ok(resource);
     }
     
+   
     [HttpPost]
+    [ProducesResponseType(typeof(CategoryResource), 201)]
+    [ProducesResponseType(typeof(List<string>), 400)]
+    [ProducesResponseType(500)]
     public async Task<IActionResult> PostAsync([FromBody] SavePetResource resource)
     {
         if (!ModelState.IsValid)
@@ -56,7 +66,7 @@ public class PetController: ControllerBase
 
         var petResource = _mapper.Map<Pet, PetResource>(result.Resource);
 
-        return Ok(petResource);
+        return Created(nameof(PostAsync), petResource);
     }
 
     [HttpPut("{id}")]
