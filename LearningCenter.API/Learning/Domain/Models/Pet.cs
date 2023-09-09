@@ -9,6 +9,7 @@ public class Pet
     public string Description{ get; set; }
     
     public int Castrado{ get; set; }
+    public int Edad{ get; set; }
 
     public int UserId{ get; set; }
     public User User{ get; set; }

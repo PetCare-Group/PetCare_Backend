@@ -10,8 +10,7 @@ public class PetService: IPetService
 {
     private readonly IPetRepository _petRepository;
     private readonly IUnitOfWork _unitOfWork;
-
-
+    
     public PetService(IPetRepository petRepository, IUnitOfWork unitOfWork)
     {
         _petRepository = petRepository;
@@ -60,6 +59,8 @@ public class PetService: IPetService
         existingPet.Name = pet.Name;
         existingPet.Description = pet.Description;
         existingPet.Castrado = pet.Castrado;
+        existingPet.Edad = pet.Edad;
+        existingPet.UserId = pet.UserId;
         try
         {
             _petRepository.Update(existingPet);

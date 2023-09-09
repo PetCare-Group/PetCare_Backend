@@ -78,7 +78,8 @@ public class PetController : ControllerBase
 
         var petResource = _mapper.Map<Pet, PetResource>(result.Resource);
 
-        return Created(nameof(PostAsync), petResource);
+        // return Created(nameof(PostAsync), petResource);
+        return Ok(petResource);
     }
 
     [HttpPut("{id}")]
@@ -86,7 +87,6 @@ public class PetController : ControllerBase
         Summary = "Update a pet",
         Description = "Change the information of your pet giving the specified Id") 
     ]
-    [ProducesResponseType(typeof(CategoryResource), 200)]
     [ProducesResponseType(typeof(List<string>), 404)]
     [ProducesResponseType(500)]
     public async Task<IActionResult> PutAsync(int id, [FromBody] SavePetResource resource)

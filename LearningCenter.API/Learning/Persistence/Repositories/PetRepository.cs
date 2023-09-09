@@ -15,7 +15,9 @@ public class PetRepository : BaseRepository ,IPetRepository
 
     public async Task<IEnumerable<Pet>> ListAsync()
     {
-        return await _context.Pets.ToListAsync();
+        return await _context.Pets
+            .Include(p=>p.User)
+            .ToListAsync();
     }
 
     public async Task AddAsync(Pet pet)

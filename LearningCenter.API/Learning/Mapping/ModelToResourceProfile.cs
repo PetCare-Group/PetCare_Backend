@@ -8,10 +8,14 @@ public class ModelToResourceProfile : Profile
 {
     public ModelToResourceProfile()
     {
-        CreateMap<Category, CategoryResource>();
         CreateMap<Service, ServiceResource>();
         CreateMap<Pet,PetResource>();
         CreateMap<Payment,PaymentResource>();
-
+        CreateMap<Reserva,ReservaResource>();
+        CreateMap<TypeUser,TypeUserResource>();
+        CreateMap<HelpQuestion,HelpQuestionResource>();
+        CreateMap<State,StateResource>();
+        CreateMap<Review,ReviewResource>();
+        CreateMap<FAQ,FAQResource>();
     }
 }

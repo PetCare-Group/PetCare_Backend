@@ -17,6 +17,7 @@ public class Payment
     // Relationships
     
     public int UserId { get; set; }
-    // public Category Category { get; set; }
     public User User { get; set; }
+    
+    public IList<Reserva> Reservas { get; set; }= new List<Reserva>();
 }

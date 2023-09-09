@@ -5,7 +5,7 @@ namespace LearningCenter.API.Learning.Resources;
 
 public class PaymentResource
 {
-   public int Id { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
     public string LastName { get; set; }
     
@@ -13,6 +13,5 @@ public class PaymentResource
 
     public DateTime ExpiratedDay { get; set; }
     public int Cvv { get; set; }
-    // public CategoryResource Category { get; set; }
-    public UserResource User { get; set; }
+    public int UserId { get; set; }
 }

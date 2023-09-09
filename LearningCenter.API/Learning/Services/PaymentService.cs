@@ -22,7 +22,7 @@ public class PaymentService : IPaymentService
 
     public async Task<Payment> GetByIdAsync(int id)
     {
-         var user = await _paymentRepository.FindByIdAsync(id);
+        var user = await _paymentRepository.FindByIdAsync(id);
         if (user == null) throw new KeyNotFoundException("Payment not found");
         return user;
     }
@@ -40,9 +40,9 @@ public class PaymentService : IPaymentService
     public async Task<PaymentResponse> SaveAsync(Payment payment)
     {
         if(payment.ExpiratedDay< DateTime.Today)
-        return new PaymentResponse (" Invalid expirated day");
+            return new PaymentResponse (" Invalid expirated day");
 
-          try
+        try
         {
             
             await _paymentRepository.AddAsync(payment);

@@ -88,15 +88,24 @@ builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSet
 
 // Dependency Injection Configuration
 
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IPetRepository, PetRepository>();
 builder.Services.AddScoped<IPetService, PetService>();
 builder.Services.AddScoped<IPaymentRepository,PaymentRepository>();
 builder.Services.AddScoped<IPaymentService,PaymentService>();
-
+builder.Services.AddScoped<ITypeUserRepository,TypeUserRepository>();
+builder.Services.AddScoped<ITypeUserService,TypeUserService>();
+builder.Services.AddScoped<IReservaRepository, ReservaRepository>(); 
+builder.Services.AddScoped<IReservaService, ReservaService>(); 
+builder.Services.AddScoped<IHelpQuestionRepository, HelpQuestionRepository>(); 
+builder.Services.AddScoped<IHelpQuestionService, HelpQuestionService>(); 
+builder.Services.AddScoped<IStateRepository, StateRepository>(); 
+builder.Services.AddScoped<IStateService, StateService>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>(); 
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IFAQRepository, FAQRepository>(); 
+builder.Services.AddScoped<IFAQService, FAQService>(); 
 // Security Injection Configuration
 builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();

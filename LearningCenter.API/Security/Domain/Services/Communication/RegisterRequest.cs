@@ -14,5 +14,13 @@ public class RegisterRequest
     public string Mail { get; set; }
 
     [Required]
+    public int Phone { get; set; }
+    [Required]
+    public int Dni { get; set; }
+    [Required]
+    public int TypeUserId { get; set; }
+
+
+    [Required]
     public string Password { get; set; }
 }
